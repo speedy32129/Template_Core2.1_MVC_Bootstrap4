@@ -8,6 +8,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 // Added for MVC
 using Microsoft.AspNetCore.Mvc;
+// Add for StaticFileOption File Provider
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 namespace Template_Core2._1_MVC_Bootstrap4
 {
@@ -35,6 +38,12 @@ namespace Template_Core2._1_MVC_Bootstrap4
                 );
             });
 
+            app.UseStaticFiles(
+                new StaticFileOptions()
+                {
+                    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot"))
+                }
+            );
         }
     }
 }
